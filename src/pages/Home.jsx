@@ -251,8 +251,8 @@ const AppMockup = () => {
       ["Inflammation", "Diarrhea"],
       ["Severe diarrhea", "Dehydration risk"]
     ][type-1],
-    icon: '💩'
-  }))
+    icon: '💩',
+  }));
 
   // Symptom groups
   const symptomGroups = {
