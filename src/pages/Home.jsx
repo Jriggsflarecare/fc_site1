@@ -694,7 +694,7 @@ const AppMockup = () => {
         </div>
       </div>
     </div>
-  )
+  );
 
   const renderLogContent = () => {
     switch (currentStep) {
