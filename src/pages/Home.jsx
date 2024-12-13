@@ -3,6 +3,9 @@ import { useState, useEffect } from 'react'
 import Logo from '../components/Logo'
 import Footer from '../components/Footer'
 
+// Test message to verify GitHub-Netlify connection
+const TEST_MESSAGE = "GitHub-Netlify connection test"
+
 const AppMockup = () => {
   const [currentScreen, setCurrentScreen] = useState('home')
   const [flareScore, setFlareScore] = useState(1.8)
@@ -687,7 +690,7 @@ const AppMockup = () => {
                 {count} {count === 1 ? 'log' : 'logs'}
               </div>
             </div>
-          ))}
+          )}
         </div>
       </div>
     </div>
@@ -1064,7 +1067,7 @@ const AppMockup = () => {
                     animate={{ opacity: 1, y: 0 }}
                   >
                     <div className="flex items-start gap-3">
-                      <span className="text-[#4ECDC4] text-lg mt-1">👨‍⚕️</span>
+                      <span className="text-[#4ECDC4] text-lg mt-1">👨‍⚕���</span>
                       <div className="flex-1">
                         <div className="font-medium text-gray-900 mb-2">Doctor Summary</div>
                         <div className="whitespace-pre-line">{doctorSummaryText}</div>
