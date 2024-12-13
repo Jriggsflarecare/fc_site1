@@ -1067,7 +1067,7 @@ const AppMockup = () => {
                     animate={{ opacity: 1, y: 0 }}
                   >
                     <div className="flex items-start gap-3">
-                      <span className="text-[#4ECDC4] text-lg mt-1">👨‍⚕���</span>
+                      <span className="text-[#4ECDC4] text-lg mt-1">👨‍⚕️</span>
                       <div className="flex-1">
                         <div className="font-medium text-gray-900 mb-2">Doctor Summary</div>
                         <div className="whitespace-pre-line">{doctorSummaryText}</div>
