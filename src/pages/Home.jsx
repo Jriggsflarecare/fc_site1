@@ -699,90 +699,34 @@ const AppMockup = () => {
         return (
           <div className="p-4">
             <h3 className="text-lg font-semibold mb-4">Select Stool Type</h3>
-            <div className="grid grid-cols-1 gap-3">
-              {stoolTypes.map((type) => (
-                <motion.button
-                  key={type.type}
-                  className={`
-                    p-4 rounded-xl border flex items-start gap-3
-                    ${selectedType === type.type 
-                      ? 'border-[#4ECDC4] bg-[#4ECDC4]/5' 
-                      : 'border-gray-200'
-                    }
-                  `}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  onClick={() => setSelectedType(type.type)}
+            <div className="grid grid-cols-2 gap-4">
+              {[1, 2, 3, 4, 5, 6, 7].map((type) => (
+                <button
+                  key={type}
+                  onClick={() => {
+                    setSelectedType(type);
+                    setCurrentStep(2);
+                  }}
+                  className={`p-4 rounded-lg border ${
+                    selectedType === type ? 'border-[#4ECDC4] bg-[#4ECDC4]/10' : 'border-gray-200'
+                  } hover:border-[#4ECDC4] transition-colors`}
                 >
-                  <span className="text-2xl">{type.icon}</span>
-                  <div className="text-left">
-                    <div className="font-medium">Type {type.type}</div>
-                    <div className="text-sm text-gray-600">{type.description}</div>
-                    <div className="flex flex-wrap gap-1 mt-1">
-                      {type.symptoms.map((symptom, i) => (
-                        <span 
-                          key={i}
-                          className="text-xs px-2 py-1 bg-gray-100 rounded-full"
-                        >
-                          {symptom}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </motion.button>
+                  <img
+                    src={`/type${type}.png`}
+                    alt={`Type ${type}`}
+                    className="w-16 h-16 mx-auto mb-2"
+                  />
+                  <div className="text-sm text-center">Type {type}</div>
+                </button>
               ))}
             </div>
           </div>
         );
-
-      case 2:
-        return (
-          <div className="p-4">
-            <h3 className="text-lg font-semibold mb-4">Additional Symptoms</h3>
-            <div className="space-y-4">
-              {Object.entries(symptomGroups).map(([group, symptoms]) => (
-                <div key={group}>
-                  <h4 className="text-sm font-medium text-gray-500 mb-2 capitalize">
-                    {group}
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {symptoms.map((symptom) => {
-                      const isSelected = selectedSymptoms.includes(symptom);
-                      return (
-                        <motion.button
-                          key={symptom}
-                          className={`
-                            px-3 py-2 rounded-full text-sm
-                            ${isSelected 
-                              ? 'bg-[#4ECDC4] text-white' 
-                              : 'bg-gray-100 text-gray-700'
-                            }
-                          `}
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                          onClick={() => {
-                            if (isSelected) {
-                              setSelectedSymptoms(selectedSymptoms.filter(s => s !== symptom))
-                            } else {
-                              setSelectedSymptoms([...selectedSymptoms, symptom])
-                            }
-                          }}
-                        >
-                          {symptom}
-                        </motion.button>
-                      );
-                    })}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        );
-
+      // Add other cases here
       default:
         return null;
     }
-  }
+  };
 
   const renderFoodScreen = () => (
     <div className="h-full bg-white overflow-auto">
@@ -827,12 +771,8 @@ const AppMockup = () => {
                     whileHover={{ scale: 1.01 }}
                     onClick={() => saveFood(item)}
                   >
-                    <div className="font-semibold text-gray-800 text-base mb-1">
-                      {item.productName}
-                    </div>
-                    <div className="text-sm text-gray-600 mb-1">
-                      {item.brandName}
-                    </div>
+                    <div className="font-semibold text-gray-800">{item.productName}</div>
+                    <div className="text-sm text-gray-600 mb-1">{item.brandName}</div>
                     <div className="text-sm text-gray-600">
                       {item.nutrition}
                     </div>
@@ -1346,7 +1286,7 @@ const Home = ({ currentSection, setCurrentSection }) => {
                   value={formData.businessName}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#4ECDC4]"
+                  className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#4ECDC4] focus:border-transparent"
                   placeholder="Your company name"
                 />
               </div>
@@ -1357,7 +1297,7 @@ const Home = ({ currentSection, setCurrentSection }) => {
                   name="website"
                   value={formData.website}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#4ECDC4]"
+                  className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#4ECDC4] focus:border-transparent"
                   placeholder="https://www.example.com"
                 />
               </div>
@@ -1369,7 +1309,7 @@ const Home = ({ currentSection, setCurrentSection }) => {
                   value={formData.contactName}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#4ECDC4]"
+                  className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#4ECDC4] focus:border-transparent"
                   placeholder="Your full name"
                 />
               </div>
@@ -1385,7 +1325,7 @@ const Home = ({ currentSection, setCurrentSection }) => {
                   value={formData.email}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#4ECDC4]"
+                  className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#4ECDC4] focus:border-transparent"
                   placeholder="contact@example.com"
                 />
               </div>
@@ -1396,7 +1336,7 @@ const Home = ({ currentSection, setCurrentSection }) => {
                   name="phone"
                   value={formData.phone}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#4ECDC4]"
+                  className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#4ECDC4] focus:border-transparent"
                   placeholder="(123) 456-7890"
                 />
               </div>
@@ -1407,7 +1347,7 @@ const Home = ({ currentSection, setCurrentSection }) => {
                   value={formData.businessType}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-[#4ECDC4]"
+                  className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-[#4ECDC4] focus:border-transparent"
                 >
                   <option value="" className="text-gray-800">Select type</option>
                   <option value="healthcare" className="text-gray-800">Healthcare Provider</option>
@@ -1430,7 +1370,7 @@ const Home = ({ currentSection, setCurrentSection }) => {
                 onChange={handleInputChange}
                 required
                 rows="3"
-                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#4ECDC4]"
+                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#4ECDC4] focus:border-transparent"
                 placeholder="Describe your product or service and its relevance to IBD patients"
               ></textarea>
             </div>
@@ -1443,7 +1383,7 @@ const Home = ({ currentSection, setCurrentSection }) => {
                 onChange={handleInputChange}
                 required
                 rows="2"
-                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#4ECDC4]"
+                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#4ECDC4] focus:border-transparent"
                 placeholder="Describe your ideal customer within our user base"
               ></textarea>
             </div>
@@ -1455,7 +1395,7 @@ const Home = ({ currentSection, setCurrentSection }) => {
                 value={formData.adBudget}
                 onChange={handleInputChange}
                 required
-                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-[#4ECDC4]"
+                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-[#4ECDC4] focus:border-transparent"
               >
                 <option value="" className="text-gray-800">Select budget range</option>
                 <option value="1000-2500" className="text-gray-800">$1,000 - $2,500</option>
@@ -1471,7 +1411,7 @@ const Home = ({ currentSection, setCurrentSection }) => {
                 name="preferredPlacement"
                 value={formData.preferredPlacement}
                 onChange={handleInputChange}
-                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-[#4ECDC4]"
+                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-[#4ECDC4] focus:border-transparent"
               >
                 <option value="" className="text-gray-800">Select placement</option>
                 <option value="in_app" className="text-gray-800">In-App Ads</option>
@@ -1489,7 +1429,7 @@ const Home = ({ currentSection, setCurrentSection }) => {
                 value={formData.additionalInfo}
                 onChange={handleInputChange}
                 rows="3"
-                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#4ECDC4]"
+                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#4ECDC4] focus:border-transparent"
                 placeholder="Any additional details or specific requirements"
               ></textarea>
             </div>
