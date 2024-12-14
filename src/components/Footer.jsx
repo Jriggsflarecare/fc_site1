@@ -4,11 +4,6 @@ import { motion } from 'framer-motion'
 const Footer = ({ setCurrentSection }) => {
   const navigate = useNavigate();
 
-  const handleAdvertise = () => {
-    setCurrentSection('advertise');
-    navigate('/');
-  };
-
   const handleHowItWorks = () => {
     navigate('/how-it-works');
   };
@@ -18,10 +13,14 @@ const Footer = ({ setCurrentSection }) => {
       <div className="max-w-6xl mx-auto px-4 sm:px-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           <div>
-            <div className="flex items-center gap-2 justify-center sm:justify-start">
+            <Link 
+              to="/" 
+              className="flex items-center gap-2 justify-center sm:justify-start"
+              onClick={() => setCurrentSection('home')}
+            >
               <img src="/flarecare-logo-export.svg" alt="FlareCare" className="h-8 w-8" />
               <span className="text-xl font-semibold text-[#4ECDC4]">FlareCare</span>
-            </div>
+            </Link>
             <p className="mt-2 text-gray-400 text-sm text-center sm:text-left">Track. Monitor. Thrive.</p>
           </div>
 
@@ -46,14 +45,13 @@ const Footer = ({ setCurrentSection }) => {
                 </button>
               </li>
               <li>
-                <motion.button
-                  onClick={handleAdvertise}
+                <Link 
+                  to="/advertise"
                   className="text-gray-400 hover:text-[#4ECDC4] text-sm"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  onClick={() => setCurrentSection('advertise')}
                 >
                   Advertise
-                </motion.button>
+                </Link>
               </li>
             </ul>
           </div>

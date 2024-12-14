@@ -9,6 +9,7 @@ import HowItWorks from './pages/HowItWorks'
 import About from './pages/About'
 import Privacy from './pages/Privacy'
 import Terms from './pages/Terms'
+import Advertise from './pages/Advertise'
 
 const Navigation = ({ currentSection, setCurrentSection }) => {
   const navigate = useNavigate();
@@ -70,7 +71,7 @@ const Navigation = ({ currentSection, setCurrentSection }) => {
           </motion.button>
           <motion.button
             className={`text-lg font-medium transition-colors ${currentSection === 'advertise' ? 'text-[#4ECDC4]' : 'text-gray-600 hover:text-[#4ECDC4]'}`}
-            onClick={() => handleNavigation('advertise', '/')}
+            onClick={() => handleNavigation('advertise', '/advertise')}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -108,7 +109,7 @@ const Navigation = ({ currentSection, setCurrentSection }) => {
             </motion.button>
             <motion.button
               className={`w-full text-left px-4 py-2 text-lg font-medium transition-colors rounded-lg ${currentSection === 'advertise' ? 'bg-[#4ECDC4]/10 text-[#4ECDC4]' : 'text-gray-600 hover:bg-gray-100'}`}
-              onClick={() => handleNavigation('advertise', '/')}
+              onClick={() => handleNavigation('advertise', '/advertise')}
             >
               Advertise
             </motion.button>
@@ -139,11 +140,12 @@ const App = () => {
           <div className="pt-32 pb-16">
             <Routes>
               <Route path="/" element={<Home currentSection={currentSection} setCurrentSection={setCurrentSection} />} />
-              <Route path="/features" element={<Features />} />
-              <Route path="/how-it-works" element={<HowItWorks />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/privacy" element={<Privacy />} />
-              <Route path="/terms" element={<Terms />} />
+              <Route path="/features" element={<Features currentSection={currentSection} setCurrentSection={setCurrentSection} />} />
+              <Route path="/how-it-works" element={<HowItWorks currentSection={currentSection} setCurrentSection={setCurrentSection} />} />
+              <Route path="/about" element={<About currentSection={currentSection} setCurrentSection={setCurrentSection} />} />
+              <Route path="/privacy" element={<Privacy currentSection={currentSection} setCurrentSection={setCurrentSection} />} />
+              <Route path="/terms" element={<Terms currentSection={currentSection} setCurrentSection={setCurrentSection} />} />
+              <Route path="/advertise" element={<Advertise />} />
             </Routes>
           </div>
         </main>
