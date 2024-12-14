@@ -17,37 +17,37 @@ const AppMockup = () => {
   ])
   const [selectedType, setSelectedType] = useState(null)
   const [selectedSymptoms, setSelectedSymptoms] = useState([])
-  const [currentTip, setCurrentTip] = useState(0);
-  const [inputText, setInputText] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const [suggestions, setSuggestions] = useState([]);
-  const [foodLogs, setFoodLogs] = useState([]);
-  const [showFoodModal, setShowFoodModal] = useState(false);
-  const [showFoodSuccess, setShowFoodSuccess] = useState(false);
-  const [showFoodDetailModal, setShowFoodDetailModal] = useState(false);
-  const [selectedFoodLog, setSelectedFoodLog] = useState(null);
+  const [currentTip, setCurrentTip] = useState(0)
+  const [inputText, setInputText] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
+  const [suggestions, setSuggestions] = useState([])
+  const [foodLogs, setFoodLogs] = useState([])
+  const [showFoodModal, setShowFoodModal] = useState(false)
+  const [showFoodSuccess, setShowFoodSuccess] = useState(false)
+  const [showFoodDetailModal, setShowFoodDetailModal] = useState(false)
+  const [selectedFoodLog, setSelectedFoodLog] = useState(null)
   const [symptoms, setSymptoms] = useState([
     { date: new Date(), painLevel: 2, symptoms: ['Gas'], bowelMovements: 1 },
     { date: new Date(Date.now() - 86400000), painLevel: 4, symptoms: ['Bloating', 'Gas', 'Urgency'], bowelMovements: 2 }
-  ]);
-  const [isTyping, setIsTyping] = useState(false);
-  const [activeReportTab, setActiveReportTab] = useState('summary');
+  ])
+  const [isTyping, setIsTyping] = useState(false)
+  const [activeReportTab, setActiveReportTab] = useState('summary')
   const [mockSymptoms] = useState([
     { date: new Date(), painLevel: 3, symptoms: ['Gas', 'Bloating'], bowelMovements: 2 },
     { date: new Date(Date.now() - 86400000), painLevel: 4, symptoms: ['Urgency', 'Pain'], bowelMovements: 3 },
     { date: new Date(Date.now() - 86400000 * 2), painLevel: 2, symptoms: ['Gas'], bowelMovements: 1 },
     { date: new Date(Date.now() - 86400000 * 3), painLevel: 5, symptoms: ['Pain', 'Bloating', 'Urgency'], bowelMovements: 4 }
-  ]);
+  ])
   const [mockProblemFoods] = useState([
     { name: 'Dairy', riskScore: 85, totalConsumptions: 8, flareIncidents: 6 },
     { name: 'Spicy Foods', riskScore: 75, totalConsumptions: 5, flareIncidents: 4 },
     { name: 'Coffee', riskScore: 60, totalConsumptions: 10, flareIncidents: 5 }
-  ]);
+  ])
   const [mockSafeFoods] = useState([
     { name: 'Bananas', safetyScore: 95, totalConsumptions: 12, flareIncidents: 0 },
     { name: 'Rice', safetyScore: 90, totalConsumptions: 15, flareIncidents: 1 },
     { name: 'Chicken', safetyScore: 85, totalConsumptions: 10, flareIncidents: 1 }
-  ]);
+  ])
   const [mockInsights] = useState({
     patterns: [
       "Higher symptom activity in the mornings",
@@ -59,109 +59,109 @@ const AppMockup = () => {
       "Try eating smaller portions more frequently",
       "Stay well hydrated throughout the day"
     ]
-  });
-  const [showDoctorSummary, setShowDoctorSummary] = useState(false);
-  const [doctorSummaryText, setDoctorSummaryText] = useState('');
-  const [isGeneratingSummary, setIsGeneratingSummary] = useState(false);
+  })
+  const [showDoctorSummary, setShowDoctorSummary] = useState(false)
+  const [doctorSummaryText, setDoctorSummaryText] = useState('')
+  const [isGeneratingSummary, setIsGeneratingSummary] = useState(false)
 
   const calculateWeeklyStats = () => {
-    const weekAgo = new Date(Date.now() - 7 * 86400000);
-    const weekSymptoms = mockSymptoms.filter(s => new Date(s.date) >= weekAgo);
+    const weekAgo = new Date(Date.now() - 7 * 86400000)
+    const weekSymptoms = mockSymptoms.filter(s => new Date(s.date) >= weekAgo)
     
-    const avgPain = (weekSymptoms.reduce((sum, s) => sum + s.painLevel, 0) / weekSymptoms.length).toFixed(1);
-    const avgBM = (weekSymptoms.reduce((sum, s) => sum + s.bowelMovements, 0) / weekSymptoms.length).toFixed(1);
+    const avgPain = (weekSymptoms.reduce((sum, s) => sum + s.painLevel, 0) / weekSymptoms.length).toFixed(1)
+    const avgBM = (weekSymptoms.reduce((sum, s) => sum + s.bowelMovements, 0) / weekSymptoms.length).toFixed(1)
     
     return {
       avgPain: avgPain || "0.0",
       avgBM: avgBM || "0.0",
       totalEntries: weekSymptoms.length.toString()
-    };
-  };
+    }
+  }
 
-  const mockDoctorSummary = `Patient has shown moderate IBD activity over the past week with an average pain level of ${calculateWeeklyStats().avgPain}. Bowel movements are averaging ${calculateWeeklyStats().avgBM} per day. Notable triggers include dairy products and spicy foods. Sleep patterns appear to affect symptom severity. Recommend continued monitoring of diet and stress levels. Consider scheduling follow-up if symptoms persist.`;
+  const mockDoctorSummary = `Patient has shown moderate IBD activity over the past week with an average pain level of ${calculateWeeklyStats().avgPain}. Bowel movements are averaging ${calculateWeeklyStats().avgBM} per day. Notable triggers include dairy products and spicy foods. Sleep patterns appear to affect symptom severity. Recommend continued monitoring of diet and stress levels. Consider scheduling follow-up if symptoms persist.`
 
   const generateDoctorSummary = () => {
-    setIsGeneratingSummary(true);
-    setShowDoctorSummary(true);
-    setDoctorSummaryText('');
-    let index = 0;
+    setIsGeneratingSummary(true)
+    setShowDoctorSummary(true)
+    setDoctorSummaryText('')
+    let index = 0
     
     const typeNextChar = () => {
       if (index < mockDoctorSummary.length) {
-        setDoctorSummaryText(mockDoctorSummary.substring(0, index + 1));
-        index++;
-        setTimeout(typeNextChar, 20);
+        setDoctorSummaryText(mockDoctorSummary.substring(0, index + 1))
+        index++
+        setTimeout(typeNextChar, 20)
       } else {
-        setIsGeneratingSummary(false);
+        setIsGeneratingSummary(false)
       }
-    };
+    }
 
-    typeNextChar();
-  };
+    typeNextChar()
+  }
 
   // Load food logs from localStorage
   useEffect(() => {
     const loadFoodLogs = () => {
       try {
-        const logs = localStorage.getItem('food_logs');
+        const logs = localStorage.getItem('food_logs')
         if (logs) {
-          const parsedLogs = JSON.parse(logs);
+          const parsedLogs = JSON.parse(logs)
           const formattedLogs = parsedLogs.map(log => ({
             ...log,
             foods: log.foods || [log.productName],
             date: log.date || log.timestamp
-          }));
-          setFoodLogs(formattedLogs);
+          }))
+          setFoodLogs(formattedLogs)
         }
       } catch (error) {
-        console.error('Error loading food logs:', error);
-        setFoodLogs([]);
+        console.error('Error loading food logs:', error)
+        setFoodLogs([])
       }
-    };
-    loadFoodLogs();
-  }, []);
+    }
+    loadFoodLogs()
+  }, [])
 
   // Auto-type effect when modal opens
   useEffect(() => {
     if (showFoodModal) {
-      setIsTyping(true);
-      setInputText('');
-      const text = "greek yogurt";
-      let index = 0;
+      setIsTyping(true)
+      setInputText('')
+      const text = "greek yogurt"
+      let index = 0
       
       const typeNextChar = () => {
         if (index < text.length) {
-          setInputText(text.slice(0, index + 1));
-          index++;
-          setTimeout(typeNextChar, 100); // Adjust speed here (100ms per character)
+          setInputText(text.slice(0, index + 1))
+          index++
+          setTimeout(typeNextChar, 100) // Adjust speed here (100ms per character)
         } else {
-          setIsTyping(false);
-          handleFoodInput(text);
+          setIsTyping(false)
+          handleFoodInput(text)
         }
-      };
+      }
 
-      typeNextChar();
+      typeNextChar()
     }
-  }, [showFoodModal]);
+  }, [showFoodModal])
 
   const debounce = (func, wait) => {
-    let timeout;
+    let timeout
     return (...args) => {
-      clearTimeout(timeout);
-      timeout = setTimeout(() => func.apply(this, args), wait);
-    };
-  };
+      clearTimeout(timeout)
+      timeout = setTimeout(() => func.apply(this, args), wait)
+    }
+  }
 
   const handleFoodInput = (text) => {
     if (!isTyping) {
-      setInputText(text);
-      debouncedSearch(text);
+      setInputText(text)
+      debouncedSearch(text)
     }
-  };
+  }
 
   const debouncedSearch = debounce(async (text) => {
     if (text.length > 2) {
-      setIsLoading(true);
+      setIsLoading(true)
       try {
         // Mock food recognition for now
         const mockResults = [
@@ -177,18 +177,18 @@ const AppMockup = () => {
             nutrition: "Rich in potassium and fiber",
             ibdConsiderations: "Easy to digest, good for IBD"
           }
-        ];
-        setSuggestions(mockResults);
+        ]
+        setSuggestions(mockResults)
       } catch (error) {
-        console.error('Error:', error);
-        setSuggestions([]);
+        console.error('Error:', error)
+        setSuggestions([])
       } finally {
-        setIsLoading(false);
+        setIsLoading(false)
       }
     } else {
-      setSuggestions([]);
+      setSuggestions([])
     }
-  }, 500);
+  }, 500)
 
   const saveFood = async (food) => {
     try {
@@ -201,31 +201,31 @@ const AppMockup = () => {
         brandName: food.brandName,
         nutrition: food.nutrition,
         ibdConsiderations: food.ibdConsiderations
-      };
+      }
       
-      const updatedLogs = [newLog, ...foodLogs];
-      localStorage.setItem('food_logs', JSON.stringify(updatedLogs));
-      setFoodLogs(updatedLogs);
-      setShowFoodModal(false);
-      setShowFoodSuccess(true);
-      setTimeout(() => setShowFoodSuccess(false), 2000);
+      const updatedLogs = [newLog, ...foodLogs]
+      localStorage.setItem('food_logs', JSON.stringify(updatedLogs))
+      setFoodLogs(updatedLogs)
+      setShowFoodModal(false)
+      setShowFoodSuccess(true)
+      setTimeout(() => setShowFoodSuccess(false), 2000)
     } catch (error) {
-      console.error('Error saving food:', error);
-      alert('Unable to save food log');
+      console.error('Error saving food:', error)
+      alert('Unable to save food log')
     }
-  };
+  }
 
   const deleteFood = async (id) => {
     try {
-      const updatedLogs = foodLogs.filter(log => log.id !== id);
-      localStorage.setItem('food_logs', JSON.stringify(updatedLogs));
-      setFoodLogs(updatedLogs);
-      setShowFoodDetailModal(false);
+      const updatedLogs = foodLogs.filter(log => log.id !== id)
+      localStorage.setItem('food_logs', JSON.stringify(updatedLogs))
+      setFoodLogs(updatedLogs)
+      setShowFoodDetailModal(false)
     } catch (error) {
-      console.error('Error deleting log:', error);
-      alert('Unable to delete food log');
+      console.error('Error deleting log:', error)
+      alert('Unable to delete food log')
     }
-  };
+  }
 
   // Bristol Scale types
   const stoolTypes = [1,2,3,4,5,6,7].map(type => ({
@@ -284,139 +284,139 @@ const AppMockup = () => {
       tip: "Quality sleep is essential for gut health and reducing inflammation.",
       icon: "😴"
     }
-  ];
+  ]
 
   const calculateFlareScore = () => {
-    if (!symptoms.length) return 1.0;
+    if (!symptoms.length) return 1.0
 
     // Look at last 48 hours of symptoms
     const recentSymptoms = symptoms.filter(symptom => {
-      const symptomDate = new Date(symptom.date);
-      const fortyEightHoursAgo = new Date(Date.now() - (48 * 60 * 60 * 1000));
-      return symptomDate >= fortyEightHoursAgo;
-    });
+      const symptomDate = new Date(symptom.date)
+      const fortyEightHoursAgo = new Date(Date.now() - (48 * 60 * 60 * 1000))
+      return symptomDate >= fortyEightHoursAgo
+    })
 
-    if (!recentSymptoms.length) return 1.0;
+    if (!recentSymptoms.length) return 1.0
 
     // Calculate average pain level
-    const totalPain = recentSymptoms.reduce((sum, symptom) => sum + (parseInt(symptom.painLevel) || 0), 0);
-    const avgPain = totalPain / recentSymptoms.length;
+    const totalPain = recentSymptoms.reduce((sum, symptom) => sum + (parseInt(symptom.painLevel) || 0), 0)
+    const avgPain = totalPain / recentSymptoms.length
 
     // Factor in number of symptoms
     const maxSymptoms = recentSymptoms.reduce((max, symptom) => 
-      Math.max(max, symptom.symptoms?.length || 0), 0);
+      Math.max(max, symptom.symptoms?.length || 0), 0)
     
     // Factor in bowel movements
     const totalBMs = recentSymptoms.reduce((sum, symptom) => 
-      sum + (parseInt(symptom.bowelMovements) || 0), 0);
-    const avgBMs = totalBMs / recentSymptoms.length;
+      sum + (parseInt(symptom.bowelMovements) || 0), 0)
+    const avgBMs = totalBMs / recentSymptoms.length
 
     // Combine factors (weighted)
-    const painWeight = 0.5;
-    const symptomsWeight = 0.3;
-    const bmWeight = 0.2;
+    const painWeight = 0.5
+    const symptomsWeight = 0.3
+    const bmWeight = 0.2
 
     const score = (
       (avgPain / 10 * painWeight) + 
       (maxSymptoms / 5 * symptomsWeight) + 
       (Math.min(avgBMs / 5, 1) * bmWeight)
-    ) * 5;
+    ) * 5
 
-    return Math.min(Math.max(score, 0), 5).toFixed(1);
-  };
+    return Math.min(Math.max(score, 0), 5).toFixed(1)
+  }
 
   const getFlareDescription = (score) => {
-    if (score <= 2) return "You're doing well! Keep tracking your symptoms.";
-    if (score <= 4) return "Mild symptoms detected. Monitor closely.";
-    return "Possible flare detected. Consider contacting your doctor.";
-  };
+    if (score <= 2) return "You're doing well! Keep tracking your symptoms."
+    if (score <= 4) return "Mild symptoms detected. Monitor closely."
+    return "Possible flare detected. Consider contacting your doctor."
+  }
 
   useEffect(() => {
-    const score = calculateFlareScore();
-    setFlareScore(parseFloat(score));
-  }, [symptoms]);
+    const score = calculateFlareScore()
+    setFlareScore(parseFloat(score))
+  }, [symptoms])
 
   const handleFlareScoreChange = (newScore) => {
     // In the demo, we'll still allow manual changes
-    setFlareScore(parseFloat(newScore.toFixed(1)));
-  };
+    setFlareScore(parseFloat(newScore.toFixed(1)))
+  }
 
   const getFlareColor = (score) => {
-    if (score <= 2) return '#4ECDC4';  // Good - Teal
-    if (score <= 4) return '#FFD93D';  // Warning - Yellow
-    return '#FF6B6B';                  // Danger - Red
-  };
+    if (score <= 2) return '#4ECDC4'  // Good - Teal
+    if (score <= 4) return '#FFD93D'  // Warning - Yellow
+    return '#FF6B6B'                  // Danger - Red
+  }
 
   const calculateStats = (logs) => {
     // Calculate weekly total
-    const weeklyTotal = logs.length;
+    const weeklyTotal = logs.length
 
     // Calculate daily average
-    const dailyAverage = (weeklyTotal / 7).toFixed(1);
+    const dailyAverage = (weeklyTotal / 7).toFixed(1)
 
     // Find most common type
     const typeCounts = logs.reduce((acc, log) => {
-      acc[log.type] = (acc[log.type] || 0) + 1;
-      return acc;
-    }, {});
+      acc[log.type] = (acc[log.type] || 0) + 1
+      return acc
+    }, {})
     const mostCommonType = Object.entries(typeCounts)
-      .sort(([,a], [,b]) => b - a)[0]?.[0] || 4;
+      .sort(([,a], [,b]) => b - a)[0]?.[0] || 4
 
     // Calculate average pain level (mock data for now)
-    const averagePainLevel = 2.5;
+    const averagePainLevel = 2.5
 
     return {
       weeklyTotal,
       dailyAverage,
       mostCommonType,
       averagePainLevel
-    };
-  };
+    }
+  }
 
   const calculateTimePatterns = (logs) => {
     const timePatterns = {
       Morning: 0,
       Afternoon: 0,
       Evening: 0
-    };
+    }
 
     logs.forEach(log => {
-      const hour = log.date.getHours();
-      if (hour >= 5 && hour < 12) timePatterns.Morning++;
-      else if (hour >= 12 && hour < 17) timePatterns.Afternoon++;
-      else timePatterns.Evening++;
-    });
+      const hour = log.date.getHours()
+      if (hour >= 5 && hour < 12) timePatterns.Morning++
+      else if (hour >= 12 && hour < 17) timePatterns.Afternoon++
+      else timePatterns.Evening++
+    })
 
-    return timePatterns;
-  };
+    return timePatterns
+  }
 
   const handleSave = () => {
-    const now = new Date();
+    const now = new Date()
     // Add new log entry with the correct date
     const newLog = {
       date: new Date(selectedDate), // Create new Date object to avoid reference issues
       type: selectedType,
       symptoms: selectedSymptoms,
       time: now.getHours() // Store hour for time patterns
-    };
-    const updatedLogs = [...logs, newLog];
-    setLogs(updatedLogs);
+    }
+    const updatedLogs = [...logs, newLog]
+    setLogs(updatedLogs)
 
     // Update last BM time
     setLastBm({ 
       time: 'Just now', 
       movements: lastBm.movements + 1 
-    });
+    })
     
     // Reset form and close modal
-    setSelectedType(null);
-    setSelectedSymptoms([]);
-    setShowLogModal(false);
-    setCurrentStep(1);
-  };
+    setSelectedType(null)
+    setSelectedSymptoms([])
+    setShowLogModal(false)
+    setCurrentStep(1)
+  }
 
-  const stats = calculateStats(logs);
-  const timePatterns = calculateTimePatterns(logs);
+  const stats = calculateStats(logs)
+  const timePatterns = calculateTimePatterns(logs)
 
   // Update the Flare Factor card render
   const renderFlareCard = () => (
@@ -481,7 +481,7 @@ const AppMockup = () => {
         </div>
       </div>
     </motion.div>
-  );
+  )
 
   const renderHomeScreen = () => (
     <div className="h-[calc(100%-7rem)] bg-gray-100 rounded-t-3xl overflow-auto">
@@ -608,15 +608,15 @@ const AppMockup = () => {
             </div>
           ))}
           {Array.from({ length: 35 }, (_, i) => {
-            const date = new Date();
-            date.setDate(date.getDate() - 15 + i);
-            const isToday = date.toDateString() === new Date().toDateString();
+            const date = new Date()
+            date.setDate(date.getDate() - 15 + i)
+            const isToday = date.toDateString() === new Date().toDateString()
             const dayLogs = logs.filter(log => 
               log.date.toDateString() === date.toDateString()
-            );
-            const poopCount = dayLogs.length;
-            const isSelected = selectedDate.toDateString() === date.toDateString();
-            const isDisabled = date > new Date();
+            )
+            const poopCount = dayLogs.length
+            const isSelected = selectedDate.toDateString() === date.toDateString()
+            const isDisabled = date > new Date()
             
             return (
               <motion.button
@@ -643,7 +643,7 @@ const AppMockup = () => {
                   </div>
                 )}
               </motion.button>
-            );
+            )
           })}
         </div>
       </div>
