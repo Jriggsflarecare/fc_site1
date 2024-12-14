@@ -690,7 +690,7 @@ const AppMockup = () => {
                 {count} {count === 1 ? 'log' : 'logs'}
               </div>
             </div>
-          )}
+          ))}
         </div>
       </div>
     </div>
@@ -1278,408 +1278,61 @@ const AppMockup = () => {
 }
 
 const Home = ({ currentSection, setCurrentSection }) => {
-  const [formData, setFormData] = useState({
-    businessName: '',
-    website: '',
-    contactName: '',
-    email: '',
-    phone: '',
-    businessType: '',
-    productDescription: '',
-    targetAudience: '',
-    adBudget: '',
-    preferredPlacement: '',
-    additionalInfo: ''
-  });
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // In a real implementation, this would send the data to a server
-    alert('Thank you for your interest! We will contact you soon.');
-    setFormData({
-      businessName: '',
-      website: '',
-      contactName: '',
-      email: '',
-      phone: '',
-      businessType: '',
-      productDescription: '',
-      targetAudience: '',
-      adBudget: '',
-      preferredPlacement: '',
-      additionalInfo: ''
-    });
-  };
-
-  const scrollToSection = (section) => {
-    setCurrentSection(section);
-    // You would typically add smooth scrolling here in a full implementation
-  };
-
-  const renderAdvertiseForm = () => (
-    <div className="max-w-4xl mx-auto py-16 px-4">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-lg"
-      >
-        <h2 className="text-3xl font-bold text-white mb-2">Advertise on FlareCare</h2>
-        <p className="text-white/80 mb-8">
-          Reach thousands of IBD patients and healthcare providers. Partner with us to showcase your products and services to our engaged community.
-        </p>
-
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="grid grid-cols-2 gap-6">
-            {/* Business Information */}
-            <div className="space-y-4">
-              <div>
-                <label className="block text-white text-sm font-medium mb-2">Business Name *</label>
-                <input
-                  type="text"
-                  name="businessName"
-                  value={formData.businessName}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#4ECDC4]"
-                  placeholder="Your company name"
-                />
-              </div>
-              <div>
-                <label className="block text-white text-sm font-medium mb-2">Website</label>
-                <input
-                  type="url"
-                  name="website"
-                  value={formData.website}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#4ECDC4]"
-                  placeholder="https://www.example.com"
-                />
-              </div>
-              <div>
-                <label className="block text-white text-sm font-medium mb-2">Contact Name *</label>
-                <input
-                  type="text"
-                  name="contactName"
-                  value={formData.contactName}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#4ECDC4]"
-                  placeholder="Your full name"
-                />
-              </div>
-            </div>
-
-            {/* Contact Information */}
-            <div className="space-y-4">
-              <div>
-                <label className="block text-white text-sm font-medium mb-2">Email *</label>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#4ECDC4]"
-                  placeholder="contact@example.com"
-                />
-              </div>
-              <div>
-                <label className="block text-white text-sm font-medium mb-2">Phone Number</label>
-                <input
-                  type="tel"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#4ECDC4]"
-                  placeholder="(123) 456-7890"
-                />
-              </div>
-              <div>
-                <label className="block text-white text-sm font-medium mb-2">Business Type *</label>
-                <select
-                  name="businessType"
-                  value={formData.businessType}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-[#4ECDC4]"
-                >
-                  <option value="" className="text-gray-800">Select type</option>
-                  <option value="healthcare" className="text-gray-800">Healthcare Provider</option>
-                  <option value="pharmaceutical" className="text-gray-800">Pharmaceutical Company</option>
-                  <option value="medical_device" className="text-gray-800">Medical Device Company</option>
-                  <option value="nutrition" className="text-gray-800">Nutrition/Supplement Company</option>
-                  <option value="other" className="text-gray-800">Other</option>
-                </select>
-              </div>
-            </div>
-          </div>
-
-          {/* Additional Information */}
-          <div className="space-y-4">
-            <div>
-              <label className="block text-white text-sm font-medium mb-2">Product/Service Description *</label>
-              <textarea
-                name="productDescription"
-                value={formData.productDescription}
-                onChange={handleInputChange}
-                required
-                rows="3"
-                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#4ECDC4]"
-                placeholder="Describe your product or service and its relevance to IBD patients"
-              ></textarea>
-            </div>
-
-            <div>
-              <label className="block text-white text-sm font-medium mb-2">Target Audience *</label>
-              <textarea
-                name="targetAudience"
-                value={formData.targetAudience}
-                onChange={handleInputChange}
-                required
-                rows="2"
-                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#4ECDC4]"
-                placeholder="Describe your ideal customer within our user base"
-              ></textarea>
-            </div>
-
-            <div>
-              <label className="block text-white text-sm font-medium mb-2">Monthly Advertising Budget *</label>
-              <select
-                name="adBudget"
-                value={formData.adBudget}
-                onChange={handleInputChange}
-                required
-                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-[#4ECDC4]"
-              >
-                <option value="" className="text-gray-800">Select budget range</option>
-                <option value="1000-2500" className="text-gray-800">$1,000 - $2,500</option>
-                <option value="2500-5000" className="text-gray-800">$2,500 - $5,000</option>
-                <option value="5000-10000" className="text-gray-800">$5,000 - $10,000</option>
-                <option value="10000+" className="text-gray-800">$10,000+</option>
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-white text-sm font-medium mb-2">Preferred Ad Placement</label>
-              <select
-                name="preferredPlacement"
-                value={formData.preferredPlacement}
-                onChange={handleInputChange}
-                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-[#4ECDC4]"
-              >
-                <option value="" className="text-gray-800">Select placement</option>
-                <option value="in_app" className="text-gray-800">In-App Ads</option>
-                <option value="sponsored_content" className="text-gray-800">Sponsored Content</option>
-                <option value="push_notifications" className="text-gray-800">Push Notifications</option>
-                <option value="email" className="text-gray-800">Email Newsletter</option>
-                <option value="multiple" className="text-gray-800">Multiple Channels</option>
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-white text-sm font-medium mb-2">Additional Information</label>
-              <textarea
-                name="additionalInfo"
-                value={formData.additionalInfo}
-                onChange={handleInputChange}
-                rows="3"
-                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#4ECDC4]"
-                placeholder="Any additional details or specific requirements"
-              ></textarea>
-            </div>
-          </div>
-
-          <div className="flex items-center justify-end space-x-4">
-            <motion.button
-              type="submit"
-              className="bg-[#4ECDC4] text-white px-8 py-3 rounded-xl font-medium shadow-lg"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              Submit Request
-            </motion.button>
-          </div>
-        </form>
-      </motion.div>
-    </div>
-  );
-
   return (
-    <>
-      {currentSection === 'advertise' ? (
-        <div className="max-w-4xl mx-auto px-4 sm:px-8">
-          {renderAdvertiseForm()}
-        </div>
-      ) : (
-        <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center lg:items-start justify-between px-4 sm:px-8">
-          {/* Left side content */}
-          <motion.div 
-            className="w-full lg:w-[45%] text-white pt-8 lg:pt-16 text-center lg:text-left"
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
-            <motion.div 
-              className="inline-block px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm mb-6 lg:mb-8 text-sm font-medium text-white"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.5 }}
-            >
-              Your IBD Health Companion
-            </motion.div>
-            <motion.h1 
-              className="text-4xl lg:text-6xl font-bold mb-4 lg:mb-6 text-white drop-shadow-lg leading-tight"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.5 }}
-            >
-              Take Control of Your <br/>
-              <span className="text-[#4ECDC4]">IBD Journey</span>
-            </motion.h1>
-            <motion.p 
-              className="text-lg lg:text-xl text-white/90 mb-6 lg:mb-8 drop-shadow leading-relaxed"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7, duration: 0.5 }}
-            >
-              Track symptoms, monitor medications, and discover patterns with FlareCare - your comprehensive IBD management companion.
-            </motion.p>
-
-            {/* Feature Cards */}
-            <div className="space-y-4 lg:space-y-6">
-              <motion.div 
-                className="flex items-center space-x-4 bg-white/10 backdrop-blur-lg rounded-xl p-4 hover:bg-white/20 transition-all border border-white/10"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.9, duration: 0.5 }}
-              >
-                <div className="w-12 h-12 rounded-full bg-[#4ECDC4]/30 flex items-center justify-center backdrop-blur-lg">
-                  📊
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold mb-1">Smart Tracking</h3>
-                  <p className="text-white/80">Log symptoms, meals, and medications with ease</p>
-                </div>
-              </motion.div>
-
-              <motion.div 
-                className="flex items-center space-x-4 bg-white/10 backdrop-blur-lg rounded-xl p-4 hover:bg-white/20 transition-all border border-white/10"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.1, duration: 0.5 }}
-              >
-                <div className="w-12 h-12 rounded-full bg-[#4ECDC4]/30 flex items-center justify-center backdrop-blur-lg">
-                  🔍
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold mb-1">Pattern Recognition</h3>
-                  <p className="text-white/80">Identify triggers and track your progress over time</p>
-                </div>
-              </motion.div>
-
-              <motion.div 
-                className="flex items-center space-x-4 bg-white/10 backdrop-blur-lg rounded-xl p-4 hover:bg-white/20 transition-all border border-white/10"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.3, duration: 0.5 }}
-              >
-                <div className="w-12 h-12 rounded-full bg-[#4ECDC4]/30 flex items-center justify-center backdrop-blur-lg">
-                  ⏰
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold mb-1">Medication Reminders</h3>
-                  <p className="text-white/80">Never miss a dose with smart notifications</p>
-                </div>
-              </motion.div>
+    <div className="min-h-screen bg-gradient-to-b from-[#1A1A1A] to-[#2D2D2D] text-white">
+      <div className="container mx-auto px-4 py-16">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-4xl md:text-5xl font-bold mb-8">Track Your IBD Journey</h1>
+          <p className="text-xl mb-12">
+            Monitor symptoms, identify triggers, and take control of your health with our comprehensive IBD tracking tools.
+          </p>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="bg-white/10 p-6 rounded-xl">
+              <h2 className="text-2xl font-semibold mb-4">Smart Symptom Tracking</h2>
+              <p className="text-gray-300 mb-6">
+                Log symptoms with our intuitive interface. Get insights into patterns and potential triggers.
+              </p>
+              <ul className="space-y-3 text-gray-300">
+                <li className="flex items-center">
+                  <span className="mr-2">✓</span>
+                  Easy-to-use symptom logger
+                </li>
+                <li className="flex items-center">
+                  <span className="mr-2">✓</span>
+                  Customizable tracking options
+                </li>
+                <li className="flex items-center">
+                  <span className="mr-2">✓</span>
+                  Visual symptom patterns
+                </li>
+              </ul>
             </div>
-          </motion.div>
-
-          {/* Right side - Phone mockup */}
-          <motion.div 
-            className="w-full lg:w-[45%] flex flex-col items-center pt-12 lg:pt-8"
-            initial={{ opacity: 0, x: 100, y: 100, rotate: 10 }}
-            animate={{ opacity: 1, x: 0, y: 0, rotate: 0 }}
-            transition={{ 
-              duration: 1,
-              type: "spring",
-              stiffness: 100,
-              damping: 15
-            }}
-          >
-            <div className="relative w-[280px] lg:w-[300px]">
-              {/* Phone frame shadow and highlights */}
-              <motion.div 
-                className="absolute inset-0 bg-gradient-to-tr from-[#4ECDC4]/20 to-white/30 rounded-[48px] transform -z-10"
-                initial={{ scale: 0.8, rotate: 15 }}
-                animate={{ scale: 1.02, rotate: 6 }}
-                transition={{
-                  duration: 1.2,
-                  delay: 0.2,
-                  type: "spring",
-                  stiffness: 100
-                }}
-              />
-              <motion.div 
-                className="absolute inset-0 bg-gradient-to-bl from-[#4ECDC4]/20 to-white/30 rounded-[48px] transform -z-10"
-                initial={{ scale: 0.8, rotate: -15 }}
-                animate={{ scale: 1.02, rotate: -6 }}
-                transition={{
-                  duration: 1.2,
-                  delay: 0.2,
-                  type: "spring",
-                  stiffness: 100
-                }}
-              />
-              
-              {/* The actual phone mockup */}
-              <AppMockup />
-
-              {/* Decorative elements */}
-              <motion.div 
-                className="absolute top-20 -left-16 w-24 h-24 bg-[#4ECDC4]/40 rounded-full blur-2xl -z-20"
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 1, delay: 0.5 }}
-              />
-              <motion.div 
-                className="absolute bottom-20 -right-16 w-24 h-24 bg-[#4ECDC4]/40 rounded-full blur-2xl -z-20"
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 1, delay: 0.7 }}
-              />
+            <div className="bg-white/10 p-6 rounded-xl">
+              <h2 className="text-2xl font-semibold mb-4">Personalized Insights</h2>
+              <p className="text-gray-300 mb-6">
+                Get AI-powered insights based on your data. Understand your IBD better than ever before.
+              </p>
+              <ul className="space-y-3 text-gray-300">
+                <li className="flex items-center">
+                  <span className="mr-2">✓</span>
+                  AI-driven analysis
+                </li>
+                <li className="flex items-center">
+                  <span className="mr-2">✓</span>
+                  Trigger identification
+                </li>
+                <li className="flex items-center">
+                  <span className="mr-2">✓</span>
+                  Personalized recommendations
+                </li>
+              </ul>
             </div>
-
-            {/* Disclaimer */}
-            <motion.div 
-              className="mt-8 text-center max-w-[250px]"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 1 }}
-            >
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-3">
-                <div className="flex items-center justify-center gap-2 text-white/90 text-sm mb-1">
-                  <span>✨</span>
-                  <span className="font-medium">Demo Version</span>
-                </div>
-                <p className="text-white/80 text-xs leading-relaxed">
-                  This demo showcases core features. Full app includes medication tracking, detailed analytics, AI insights, and healthcare integration.
-                </p>
-              </div>
-            </motion.div>
-          </motion.div>
+          </div>
         </div>
-      )}
-    </>
+      </div>
+      <AppMockup />
+    </div>
   )
 }
 
-export default Home 
+export default Home
